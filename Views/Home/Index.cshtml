@@ -1,0 +1,10 @@
+@model HomeViewModel
+@{ ViewData["Title"] = "Dashboard"; }
+<h1>Customer Dashboard</h1>
+<h2 class="h4 mt-4">Customer summaries</h2>
+@foreach (var customer in Model.FeaturedCustomers) { <div class="alert alert-light border">@customer.GetSummary()</div> }
+<h2 class="h4 mt-4">LINQ results</h2>
+<h5>Active customers sorted alphabetically</h5>
+<ul>@foreach (var c in Model.ActiveCustomers) { <li>@c.FullName (@c.Email)</li> }</ul>
+<p><strong>First Gmail customer:</strong> @(Model.FirstGmailCustomer?.FullName ?? "None")</p>
+<p><strong>Customers created in @DateTime.Now.Year:</strong> @Model.CurrentYearCustomerCount</p>

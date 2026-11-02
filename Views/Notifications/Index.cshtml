@@ -1,0 +1,14 @@
+@{ ViewData["Title"] = "Notifications"; }
+<h1>Real-time Notifications</h1>
+<p>Open this page in two tabs, then send a message.</p>
+<div class="input-group mb-3"><input id="messageInput" class="form-control" placeholder="Type a notification..." /><button id="sendButton" class="btn btn-primary">Send</button></div>
+<div id="notifications" class="list-group"></div>
+@section Scripts {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+<script>
+const connection = new signalR.HubConnectionBuilder().withUrl('/notificationHub').build();
+connection.on('ReceiveNotification', message => { const item = document.createElement('div'); item.className = 'list-group-item'; item.textContent = message; document.getElementById('notifications').prepend(item); });
+document.getElementById('sendButton').addEventListener('click', async () => { const input = document.getElementById('messageInput'); if (input.value.trim()) { await connection.invoke('SendNotification', input.value.trim()); input.value = ''; } });
+connection.start().catch(err => console.error(err));
+</script>
+}
