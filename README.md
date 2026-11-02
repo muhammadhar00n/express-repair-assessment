@@ -11,6 +11,3 @@ ASP.NET Core MVC (.NET 6) implementation of all five screening tasks.
 
 Data is intentionally stored in memory and resets when the application restarts.
 
-## Submission note
-
-The project is ready to commit and push to GitHub. Adding `MrAndreyG` as a collaborator and uploading requires access to the target GitHub repository/account.
